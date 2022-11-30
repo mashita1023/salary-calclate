@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    container_name: 'SC-API'
+    container_name: 'SALARY_CALCULATE__API'
     build:
       context: .
       dockerfile: ./backend/Dockerfile
@@ -11,3 +11,20 @@ services:
     ports:
       - '8000:8000'
     command: python src/main.py
+    restart: always
+    privileged: true
+    stdin_open: true
+    tty: true
+    links:
+      - db
+    env_file: .env
+  db:
+    container_name: 'SALARY_CALCULATE__DB'
+    image: mariadb:10.10.2
+    volumes:
+      - ./mariadb/initdb.d:/docker-entrypoint-initdb.d
+      - ./mariadb/db:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --skip-character-set-client-handshake
+    env_file: .env
