@@ -1,4 +1,4 @@
-FROM python:3.10-buster
+FROM python:3.11-buster
 COPY ./backend /app
 WORKDIR /app
 RUN pip install --upgrade pip
