@@ -20,7 +20,7 @@ services:
     env_file: .env
   db:
     container_name: 'SALARY_CALCULATE__DB'
-    image: mariadb:10.10.2
+    image: mariadb:10.11.7
     volumes:
       - ./mariadb/initdb.d:/docker-entrypoint-initdb.d
       - ./mariadb/db:/var/lib/mysql
